@@ -19,7 +19,7 @@ const alertVariants = cva(
           "text-foreground bg-yellow-900 [&>svg]:text-yellow-500 *:data-[slot=alert-description]:text-yellow-800/90",
         info: "text-foreground bg-blue-900 [&>svg]:text-blue-500 *:data-[slot=alert-description]:text-blue-800/90",
       },
-      mode: {
+      appearance: {
         solid: "border-transparent",
         outline: "border-2 border-border bg-transparent",
         dashed: "border-2 border-dashed border-border bg-transparent",
@@ -27,7 +27,7 @@ const alertVariants = cva(
     },
     defaultVariants: {
       variant: "default",
-      mode: "solid",
+      appearance: "solid",
     },
   }
 );
@@ -45,7 +45,7 @@ export function Alert({
   children,
   close,
   onClose,
-  mode,
+  appearance,
   ...props
 }: AlertProps) {
   return (
@@ -53,13 +53,13 @@ export function Alert({
       data-slot="alert"
       role="alert"
       aria-live="polite"
-      className={cn(alertVariants({ variant, mode }), className)}
+      className={cn(alertVariants({ variant, appearance }), className)}
       {...props}
     >
       {children}
       {close && (
         <Button
-          variant="invert"
+          variant="ghost"
           size="sm"
           aria-label="Close"
           data-slot="alert-close"

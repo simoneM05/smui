@@ -12,7 +12,6 @@ import {
   NavigationMenuLink,
 } from "../ui/navigation-menu";
 import { SignedIn } from "@clerk/nextjs";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import {
@@ -21,20 +20,19 @@ import {
   DrawerContent,
   DrawerTitle,
 } from "@/components/ui/drawer"; // il tuo nuovo wrapper
-import { allLinks } from "@/utils/constants";
+import * as link from "@/utils/constants";
+import { Separator } from "../ui/separetor";
 
 const NavbarLinksMobile = () => {
-  const pathname = usePathname();
   return (
     <>
-      {allLinks.map((link) => (
+      {link.mainLinks.map((link) => (
         <NavigationMenuItem key={link.href}>
-          <NavigationMenuLink asChild>
+          <NavigationMenuLink className="py-1" asChild>
             <Link
               href={link.href}
               className={cn(
-                "text-base font-medium hover:text-foreground text-foreground/70 transition-colors  hover:bg-transparent active:bg-transparent focus:bg-transparent",
-                pathname === link.href && "text-foreground"
+                "text-base  font-medium text-foreground transition-colors  hover:bg-transparent active:bg-transparent focus:bg-transparent"
               )}
             >
               {link.label}
@@ -48,8 +46,7 @@ const NavbarLinksMobile = () => {
             <Link
               href="/Profile"
               className={cn(
-                "text-base font-medium hover:text-foreground text-foreground/70 transition-colors hover:bg-transparent active:bg-transparent focus:bg-transparent",
-                pathname === "/Profile" && "text-foreground"
+                "text-base font-medium text-foreground transition-colors hover:bg-transparent active:bg-transparent focus:bg-transparent"
               )}
             >
               Profile
@@ -57,6 +54,22 @@ const NavbarLinksMobile = () => {
           </NavigationMenuLink>
         </NavigationMenuItem>
       </SignedIn>
+      <Separator className="bg-transparent p-2" />
+      <p className="text-sm text-primary font-medium">Component UI</p>
+      {link.docsLinks.map((link) => (
+        <NavigationMenuItem key={link.href}>
+          <NavigationMenuLink className="py-1" asChild>
+            <Link
+              href={link.href}
+              className={cn(
+                "text-base font-medium  text-foreground/50 transition-colors  hover:bg-transparent active:bg-transparent focus:bg-transparent"
+              )}
+            >
+              {link.label}
+            </Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      ))}
     </>
   );
 };
@@ -84,17 +97,17 @@ export const NavbarMobile = () => {
               </button>
             </DrawerTrigger>
 
-            <DrawerContent className="max-h-[40vh]">
+            <DrawerContent className="max-h-[40vh] border-b-none border-r-none border-l-none">
               <DrawerTitle>
                 <VisuallyHidden.Root>Menu</VisuallyHidden.Root>
               </DrawerTitle>
 
               <div
-                className="px-6 py-8 overflow-y-auto scrollbar-custom"
+                className="overflow-y-auto scrollbar-custom"
                 onScroll={handleScroll}
               >
-                <NavigationMenu>
-                  <NavigationMenuList className="flex flex-col items-start">
+                <NavigationMenu className="overflow-hidden">
+                  <NavigationMenuList className="flex flex-col w-screen px-6 py-8  items-start">
                     <NavbarLinksMobile />
                   </NavigationMenuList>
                 </NavigationMenu>
@@ -109,7 +122,7 @@ export const NavbarMobile = () => {
 
         <div className="flex-shrink-0 flex items-center">
           <ThemeSwitcher />
-          <UserButtonProfile />
+          {/* <UserButtonProfile /> */}
         </div>
       </div>
     </div>

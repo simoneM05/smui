@@ -102,7 +102,7 @@ const NavbarDesktop = () => (
 
     <div className="flex-shrink-0 flex items-center">
       <ThemeSwitcher />
-      <UserButtonProfile showName />
+      {/* <UserButtonProfile showName /> */}
     </div>
   </div>
 );

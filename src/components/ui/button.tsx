@@ -13,73 +13,31 @@ const buttonVariants = cva(
           "text-secondary-foreground bg-secondary hover:bg-secondary/40",
         danger:
           "text-destructive-foreground bg-destructive hover:bg-destructive/90",
-        invert: "text-primary bg-transparent",
-        icon: "bg-transparent text-foreground ",
-      },
-      mode: {
-        solid: "",
-        outline: "bg-transparent border-2",
-        dashed:
-          "bg-transparent text-foreground border-foreground border-2 border-dashed",
         ghost:
           "bg-transparent hover:bg-accent text-foreground hover:text-foreground/80",
-        link: "bg-transparent text-primary/70 hover:bg-transparent underline underline-offset-4 hover:text-primary",
+        link: "bg-transparent text-primary hover:underline underline-offset-4",
+        outline:
+          "bg-transparent border border-border text-foreground hover:bg-accent/20",
+        dashed:
+          "bg-transparent border-2 border-dashed border-border text-foreground hover:bg-accent/50",
+        none: "",
       },
-
       size: {
         sm: "h-7 px-3 text-sm",
         md: "h-9 px-4 text-base",
         lg: "h-11 px-6 text-lg",
-        icon: "size-8 rounded-full",
+        icon: "h-8 w-8 p-0 flex items-center justify-center rounded-full",
       },
       shape: {
         rounded: "rounded-lg",
         pill: "rounded-full",
         square: "rounded-none",
       },
-      underline: {
-        none: "",
-        hidden: "hover:underline underline-offset-4 decoration-2",
-        solid: "underline underline-offset-4 decoration-solid",
-        dashed: "underline underline-offset-4 decoration-dashed decoration-2",
-      },
-      opacity: {
-        full: "opacity-100",
-        medium: "opacity-70 hover:opacity-80",
-        low: "opacity-50 hover:opacity-60",
-        none: "",
-      },
     },
-    compoundVariants: [
-      {
-        mode: "outline",
-        variant: "primary",
-        className: "border-primary text-primary hover:bg-primary/10",
-      },
-      {
-        mode: "outline",
-        variant: "secondary",
-        className: "border-secondary text-secondary hover:bg-secondary/10",
-      },
-      {
-        mode: "outline",
-        variant: "danger",
-        className:
-          "border-destructive text-destructive hover:bg-destructive/10",
-      },
-      {
-        variant: "danger",
-        underline: "dashed",
-        className: "decoration-destructive",
-      },
-    ],
     defaultVariants: {
       variant: "primary",
-      mode: "solid",
       size: "md",
       shape: "rounded",
-      underline: "none",
-      opacity: "none",
     },
   }
 );
@@ -90,11 +48,8 @@ type ButtonProps = React.ComponentProps<"button"> &
 function Button({
   className,
   variant,
-  mode,
   size,
   shape,
-  underline,
-  opacity,
   asChild = false,
   ...props
 }: ButtonProps) {
@@ -105,11 +60,8 @@ function Button({
       className={cn(
         buttonVariants({
           variant,
-          mode,
           size,
           shape,
-          underline,
-          opacity,
           className,
         })
       )}
