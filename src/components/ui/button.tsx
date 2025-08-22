@@ -23,10 +23,10 @@ const buttonVariants = cva(
         none: "",
       },
       size: {
-        sm: "h-7 px-3 text-sm",
-        md: "h-9 px-4 text-base",
-        lg: "h-11 px-6 text-lg",
-        icon: "h-8 w-8 p-0 flex items-center justify-center rounded-full",
+        lg: "h-10 rounded-md px-4 text-sm gap-1.5 [&_svg:not([class*=size-])]:size-4",
+        md: "h-8.5 rounded-md px-3 gap-1.5 text-[0.8125rem] [&_svg:not([class*=size-])]:size-4",
+        sm: "h-7 rounded-md px-2.5 gap-1.25 text-xs [&_svg:not([class*=size-])]:size-3.5",
+        icon: "size-8.5 rounded-md [&_svg:not([class*=size-])]:size-4 shrink-0",
       },
       shape: {
         rounded: "rounded-lg",

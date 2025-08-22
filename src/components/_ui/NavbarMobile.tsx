@@ -4,7 +4,6 @@ import React, { useRef } from "react";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import { ThemeSwitcher } from "./themeSwitch";
-import { UserButtonProfile } from "./UserProfile";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -103,7 +102,7 @@ export const NavbarMobile = () => {
               </DrawerTitle>
 
               <div
-                className="overflow-y-auto scrollbar-custom"
+                className="overflow-y-auto scrollbar"
                 onScroll={handleScroll}
               >
                 <NavigationMenu className="overflow-hidden">
