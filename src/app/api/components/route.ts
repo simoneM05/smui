@@ -13,7 +13,7 @@ export async function GET() {
 
     return NextResponse.json(components, { status: 200 });
   } catch (error) {
-    console.error("Errore nel recupero del componente:", error);
+    console.error("Errore nel recupero dei componente:", error);
     return NextResponse.json(
       { error: `Errore nel recupero dei componenti: ${error}` },
       { status: 500 }
