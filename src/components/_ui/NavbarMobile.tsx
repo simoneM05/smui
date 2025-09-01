@@ -10,7 +10,7 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
 } from "../ui/navigation-menu";
-import { SignedIn } from "@clerk/nextjs";
+// import { SignedIn } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import {

@@ -10,7 +10,7 @@ import Link from "next/link";
 import { ThemeSwitcher } from "./themeSwitch";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import { SignedIn } from "@clerk/nextjs";
+// import { SignedIn } from "@clerk/nextjs";
 import { NavbarMobile } from "./NavbarMobile";
 import { Skeleton } from "../ui/skeleton";
 

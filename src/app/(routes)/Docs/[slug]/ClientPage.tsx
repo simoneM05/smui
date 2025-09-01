@@ -19,7 +19,7 @@ export default function ClientPage({ comp }: Props) {
 
   React.useEffect(() => {
     setComp(comp);
-  }, [comp]);
+  }, [comp, setComp]);
   return (
     <main className="space-y-8 mx-[15%]">
       <Header />

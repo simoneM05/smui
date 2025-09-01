@@ -11,7 +11,6 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react";
 
 const components = [
   {
