@@ -1,13 +1,12 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-// GET /api/components/[slug]
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } } // Cambiato da Promise a oggetto
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const { slug } = params; // Ottieni il slug direttamente dai parametri
+    const { slug } = await params; // Ottieni il slug direttamente dai parametri
 
     // Recupera il componente dal database
     const component = await prisma.component.findUnique({
