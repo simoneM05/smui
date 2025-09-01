@@ -36,7 +36,7 @@ const CreditSection = () => {
           Built with:
           <Button
             underline
-            apparance="link"
+            appearance="link"
             size="md"
             className="py-0 text-md text-blue-800 flex items-center gap-1"
           >

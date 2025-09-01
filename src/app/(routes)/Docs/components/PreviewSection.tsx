@@ -105,14 +105,14 @@ export const PreviewBase = () => {
 
           <div className="flex m-2 gap-2">
             {deviceType === "mobile" ? (
-              <Button variant="invert" apparance="outline" size="sm">
+              <Button variant="invert" appearance="outline" size="sm">
                 <TerminalIcon size={16} />
               </Button>
             ) : (
               <Button
                 size={buttonSize}
                 variant="invert"
-                apparance="outline"
+                appearance="outline"
                 className="flex justify-between items-center max-w-[180px] whitespace-nowrap px-1"
                 onClick={() => navigator.clipboard.writeText(comp[command])}
               >
@@ -125,7 +125,7 @@ export const PreviewBase = () => {
             <Button
               size={buttonSize}
               variant="invert"
-              apparance="outline"
+              appearance="outline"
               onClick={() => {
                 setReload(true);
                 setTimeout(() => setReload(false), 1000);
@@ -142,7 +142,7 @@ export const PreviewBase = () => {
                 <Button
                   size={buttonSize}
                   variant="invert"
-                  apparance="outline"
+                  appearance="outline"
                   onClick={() => {
                     navigator.clipboard.writeText(code);
                     setCopyed(true);
@@ -190,7 +190,7 @@ export const PreviewBase = () => {
             setCode(comp.code);
             setCommandComp(comp[command]);
           }}
-          apparance="outline"
+          appearance="outline"
           variant={comp.demoName === demoName ? "primary" : "invert"}
           className={cn(
             "text-muted-foreground border-2",
@@ -207,7 +207,7 @@ export const PreviewBase = () => {
               setCode(example.code);
               setCommandComp(example[command]);
             }}
-            apparance="outline"
+            appearance="outline"
             variant={example.demoName === demoName ? "primary" : "invert"}
             className={cn(
               "text-muted-foreground border-2",

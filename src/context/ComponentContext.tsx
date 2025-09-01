@@ -1,10 +1,13 @@
 "use client";
+
 import { ComponentR } from "@/type";
 import { createContext, useContext, ReactNode, useState } from "react";
 
 type ComponentContextType = {
-  comp: ComponentR | null; // può essere inizialmente null
-  setComp: (comp: ComponentR) => void;
+  comp: ComponentR | null; // Componente attualmente selezionato
+  setComp: (comp: ComponentR) => void; // Funzione per impostare il componente attualmente selezionato
+  components: ComponentR[]; // Lista di tutti i componenti
+  setComponents: (components: ComponentR[]) => void; // Funzione per impostare la lista di componenti
 };
 
 const ComponentContext = createContext<ComponentContextType | undefined>(
@@ -19,9 +22,13 @@ export const useComponent = () => {
 };
 
 export const ComponentProvider = ({ children }: { children: ReactNode }) => {
-  const [comp, setComp] = useState<ComponentR | null>(null); // tipizzato correttamente
+  const [comp, setComp] = useState<ComponentR | null>(null); // Componente attualmente selezionato
+  const [components, setComponents] = useState<ComponentR[]>([]); // Lista di tutti i componenti
+
   return (
-    <ComponentContext.Provider value={{ comp, setComp }}>
+    <ComponentContext.Provider
+      value={{ comp, setComp, components, setComponents }}
+    >
       {children}
     </ComponentContext.Provider>
   );

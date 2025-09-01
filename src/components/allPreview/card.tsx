@@ -64,7 +64,7 @@ export function CardDemo() {
     <Card className="w-[400px]">
       <CardHeader>
         <CardTitle>Recent Users</CardTitle>
-        <Button apparance="outline" size="sm">
+        <Button appearance="outline" size="sm">
           <Settings />
         </Button>
       </CardHeader>
@@ -108,7 +108,7 @@ export function CardDemo() {
         })}
       </CardContent>
       <CardFooter className="justify-center">
-        <Button apparance="link" underline>
+        <Button appearance="link" underline>
           <Link href="#">Learn more</Link>
         </Button>
       </CardFooter>

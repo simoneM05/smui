@@ -21,7 +21,7 @@ export function AlertDialogDemo() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button apparance="outline" size="lg">
+        <Button appearance="outline" size="lg">
           show dialog
         </Button>
       </AlertDialogTrigger>
@@ -46,7 +46,7 @@ export function AlertDialog_Destructive() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button apparance="outline" size="lg">
+        <Button appearance="outline" size="lg">
           show dialog
         </Button>
       </AlertDialogTrigger>

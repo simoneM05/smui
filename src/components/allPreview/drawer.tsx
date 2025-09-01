@@ -69,7 +69,7 @@ export function DrawerDemo() {
                 </div>
                 <Button
                   size="sm"
-                  apparance={notifications ? "solid" : "outline"}
+                  appearance={notifications ? "solid" : "outline"}
                   onClick={() => setNotifications(!notifications)}
                   className="min-w-16"
                 >
@@ -93,7 +93,7 @@ export function DrawerDemo() {
                 </div>
                 <Button
                   size="sm"
-                  apparance={darkMode ? "solid" : "outline"}
+                  appearance={darkMode ? "solid" : "outline"}
                   onClick={() => setDarkMode(!darkMode)}
                   className="min-w-16"
                 >
@@ -149,13 +149,13 @@ export function DrawerDemo() {
 
             <div className="flex gap-3">
               <DrawerClose asChild className="flex-1">
-                <Button apparance="outline" size="md" className="flex-1">
+                <Button appearance="outline" size="md" className="flex-1">
                   Annulla
                 </Button>
               </DrawerClose>
 
               <DrawerClose asChild className="flex-1">
-                <Button apparance="ghost" size="md" className="flex-1">
+                <Button appearance="ghost" size="md" className="flex-1">
                   Chiudi
                 </Button>
               </DrawerClose>

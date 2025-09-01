@@ -11,49 +11,43 @@ import Link from "next/link";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
-import { Category, Component } from "@/generated/prisma";
+import { Category } from "@/generated/prisma";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useComponent } from "@/context/ComponentContext";
+import { fetchComponents } from "@/lib/fetching";
 
 const SideNavbar = () => {
   const pathname = usePathname();
   const linkStarted = GetStartedLinks;
+  const { setComponents, components } = useComponent();
 
   const [docsLinks, setDocsLinks] = React.useState<
     { href: string; label: string; category: Category }[]
   >([]);
 
-  const fetchComponents = async () => {
-    try {
-      const res = await fetch("/api/components");
-      if (!res.ok) throw new Error("Errore nel fetch dei componenti");
-      const components: Component[] = await res.json();
-
-      const links = components
-        .map((c) => ({
-          href: `/Docs/${c.name}`,
-          label: c.name.replace("-", " "),
-          category: c.category,
-        }))
-        .sort((a, b) => a.label.localeCompare(b.label));
-
-      setDocsLinks(links);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   React.useEffect(() => {
-    // fetch iniziale
-    fetchComponents();
+    if (components.length > 0) {
+      setDocsLinks(
+        components
+          .map((c) => ({
+            href: `/Docs/${c.name}`,
+            label: c.name.replace("-", " "),
+            category: c.category,
+          }))
+          .sort((a, b) => a.label.localeCompare(b.label))
+      );
+    } else {
+      fetchComponents(setComponents, setDocsLinks);
+    }
 
     // revalidate ogni 30 secondi
     const interval = setInterval(() => {
-      fetchComponents();
-    }, 30000); // 30.000 ms = 30 secondi
+      fetchComponents(setComponents, setDocsLinks);
+    }, 60000);
 
     // cleanup
     return () => clearInterval(interval);
-  }, []);
+  }, [components, setComponents]);
 
   return (
     <NavigationMenu className="flex-col gap-2 text-left justify-start max-h-[80vh] no-scrollbar px-3 overflow-y-scroll">

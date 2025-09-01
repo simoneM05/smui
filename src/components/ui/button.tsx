@@ -15,7 +15,7 @@ const buttonVariants = cva(
           "text-destructive-foreground bg-destructive hover:bg-destructive/40",
         invert: "",
       },
-      apparance: {
+      appearance: {
         solid: "",
         outline:
           "border-2 border-border hover:bg-accent/20 text-foreground bg-transparent",
@@ -42,53 +42,53 @@ const buttonVariants = cva(
     compoundVariants: [
       {
         variant: "primary",
-        apparance: "outline",
+        appearance: "outline",
         class: "text-primary border-primary hover:bg-primary/10",
       },
       {
         variant: "secondary",
-        apparance: "outline",
+        appearance: "outline",
         class: "text-secondary border-secondary hover:bg-secondary/10",
       },
       {
         variant: "danger",
-        apparance: "outline",
+        appearance: "outline",
         class: "text-destructive border-destructive hover:bg-destructive/10",
       },
       {
         variant: "primary",
-        apparance: "ghost",
+        appearance: "ghost",
         class: "text-primary bg-transparent hover:bg-primary/10",
       },
       {
         variant: "secondary",
-        apparance: "ghost",
+        appearance: "ghost",
         class: "text-secondary bg-transparent hover:bg-secondary/10",
       },
       {
         variant: "danger",
-        apparance: "ghost",
+        appearance: "ghost",
         class: "text-destructive bg-transparent hover:bg-destructive/10",
       },
       {
         variant: "primary",
-        apparance: "dashed",
+        appearance: "dashed",
         class: "text-primary  border-primary hover:text-primary/70",
       },
       {
         variant: "secondary",
-        apparance: "dashed",
+        appearance: "dashed",
         class: "text-secondary border-secondary hover:text-secondary/70",
       },
       {
         variant: "danger",
-        apparance: "dashed",
+        appearance: "dashed",
         class: "text-destructive border-destructive hover:text-destructive/70",
       },
     ],
     defaultVariants: {
       variant: "primary",
-      apparance: "solid",
+      appearance: "solid",
       size: "md",
       shape: "rounded",
       underline: false,
@@ -103,7 +103,7 @@ function Button({
   className,
   variant,
   size,
-  apparance,
+  appearance,
   underline,
   shape,
   asChild = false,
@@ -111,7 +111,7 @@ function Button({
 }: ButtonProps) {
   const Comp = asChild ? Slot : "button";
   const resolvedVariant =
-    apparance === "outline" && !variant ? "invert" : variant;
+    appearance === "outline" && !variant ? "invert" : variant;
 
   return (
     <Comp
@@ -121,7 +121,7 @@ function Button({
           variant: resolvedVariant,
           size,
           shape,
-          apparance,
+          appearance,
           underline,
           className,
         })

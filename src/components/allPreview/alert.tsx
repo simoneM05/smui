@@ -36,12 +36,7 @@ export function AlertDemo() {
 export function Alert_Solid() {
   return (
     <div className="flex flex-col items-center gap-5">
-      <Alert
-        close
-        variant="default"
-        className="text-green-"
-        appearance="solid"
-      >
+      <Alert close variant="default" className="text-green-" appearance="solid">
         <MessageCircleIcon />
         <AlertTitle>Default alert.</AlertTitle>
       </Alert>
@@ -145,8 +140,8 @@ export function Alert_Action() {
           of text.
         </AlertDescription>
         <AlertToolbar>
-          <Button apparance="ghost">Upgrade</Button>
-          <Button apparance="ghost">Dissmis</Button>
+          <Button appearance="ghost">Upgrade</Button>
+          <Button appearance="ghost">Dissmis</Button>
         </AlertToolbar>
       </Alert>
     </div>

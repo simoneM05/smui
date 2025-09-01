@@ -39,7 +39,7 @@ const NavPage = () => {
             className="flex flex-col items-start"
           >
             <Button
-              apparance={"link"}
+              appearance={"link"}
               className="text-md whitespace-nowrap p-0 no-underline hover:no-underline text-muted-foreground hover:text-foreground"
               onClick={() => {
                 document.getElementById(section.id)?.scrollIntoView({
@@ -56,7 +56,7 @@ const NavPage = () => {
                 {section.children.map((child) => (
                   <Button
                     key={child.id}
-                    apparance={"link"}
+                    appearance={"link"}
                     className="text-sm whitespace-nowrap p-0 no-underline hover:no-underline text-muted-foreground hover:text-foreground"
                     onClick={() => {
                       document.getElementById(child.id)?.scrollIntoView({

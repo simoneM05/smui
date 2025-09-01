@@ -21,33 +21,40 @@ import {
 } from "@/components/ui/drawer"; // il tuo nuovo wrapper
 import * as link from "@/utils/constants";
 import { Separator } from "../ui/separetor";
-import { Component } from "@/generated/prisma";
+import { Category } from "@/generated/prisma";
+import { useComponent } from "@/context/ComponentContext";
+import { fetchComponents } from "@/lib/fetching";
+import { Skeleton } from "../ui/skeleton";
 
 const NavbarLinksMobile = () => {
+  const { setComponents, components } = useComponent();
   const [docsLinks, setDocsLinks] = React.useState<
-    { href: string; label: string }[]
+    { href: string; label: string; category: Category }[]
   >([]);
 
   React.useEffect(() => {
-    const fetchComponents = async () => {
-      try {
-        const res = await fetch("/api/components");
-        if (!res.ok) throw new Error("Errore nel fetch dei componenti");
-        const components = await res.json();
+    if (components.length > 0) {
+      setDocsLinks(
+        components
+          .map((c) => ({
+            href: `/Docs/${c.name}`,
+            label: c.name.replace("-", " "),
+            category: c.category,
+          }))
+          .sort((a, b) => a.label.localeCompare(b.label))
+      );
+    } else {
+      fetchComponents(setComponents, setDocsLinks);
+    }
 
-        const links = components.map((c: Component) => ({
-          href: `/Docs/${c.name}`,
-          label: c.name,
-        }));
+    // revalidate ogni 30 secondi
+    const interval = setInterval(() => {
+      fetchComponents(setComponents, setDocsLinks);
+    }, 60000);
 
-        setDocsLinks(links);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchComponents();
-  }, []);
+    // cleanup
+    return () => clearInterval(interval);
+  }, [components, setComponents]);
 
   return (
     <>
@@ -69,20 +76,26 @@ const NavbarLinksMobile = () => {
       <Separator className="bg-transparent p-2" />
       <p className="text-sm text-primary font-medium">Component UI</p>
 
-      {docsLinks.map((link) => (
-        <NavigationMenuItem key={link.href}>
-          <NavigationMenuLink className="py-1" asChild>
-            <Link
-              href={link.href}
-              className={cn(
-                "text-base font-medium text-foreground/50 transition-colors hover:bg-transparent active:bg-transparent focus:bg-transparent"
-              )}
-            >
-              {link.label}
-            </Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-      ))}
+      {docsLinks.length === 0
+        ? Array.from({ length: 16 }).map((_, i) => (
+            <NavigationMenuItem key={i}>
+              <Skeleton className="h-4 w-27 m-1" />
+            </NavigationMenuItem>
+          ))
+        : docsLinks.map((link) => (
+            <NavigationMenuItem key={link.href}>
+              <NavigationMenuLink className="py-1" asChild>
+                <Link
+                  href={link.href}
+                  className={cn(
+                    "text-base font-medium text-foreground/50 transition-colors hover:bg-transparent active:bg-transparent focus:bg-transparent"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          ))}
     </>
   );
 };

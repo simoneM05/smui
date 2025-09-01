@@ -7,12 +7,13 @@ export async function GET() {
   try {
     const components = await prisma.component.findMany({
       include: {
-        examples: true, // Include anche gli ExampleComponent se necessario
+        examples: true,
+        credits: true,
       },
     });
 
     // Controlla se non ci sono componenti trovati
-    if (components.length === 0) {
+    if (!components) {
       return NextResponse.json(
         { message: "Nessun componente trovato." },
         { status: 404 } // Restituisce un errore 404 se non ci sono componenti
@@ -26,9 +27,7 @@ export async function GET() {
     // Restituisce un messaggio di errore più dettagliato
     return NextResponse.json(
       {
-        error: `Errore nel recupero dei componenti: ${
-          error instanceof Error ? error.message : error
-        }`,
+        error: `Errore nel recupero dei componenti:`,
       },
       { status: 500 }
     );

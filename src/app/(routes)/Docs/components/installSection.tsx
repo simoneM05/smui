@@ -89,7 +89,7 @@ export const CLIinstallation = ({ comp }: { comp: InstallCommands }) => {
             </TabsTrigger>
           ))}
         </div>
-        <Button apparance={"ghost"} onClick={handleCopy}>
+        <Button appearance={"ghost"} onClick={handleCopy}>
           {copied ? (
             <ClipboardCheckIcon size={16} />
           ) : (

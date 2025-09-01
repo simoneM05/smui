@@ -22,10 +22,10 @@ export function Disable_Button() {
 export function Ghost_Button() {
   return (
     <div className="flex gap-5">
-      <Button apparance="ghost" size="lg">
+      <Button appearance="ghost" size="lg">
         Button
       </Button>
-      <Button variant="danger" size="lg">
+      <Button appearance={"ghost"} variant="danger" size="lg">
         Button
       </Button>
     </div>
@@ -35,13 +35,13 @@ export function Ghost_Button() {
 export function Outline_Button() {
   return (
     <div className="flex gap-5">
-      <Button apparance="outline" size="lg">
+      <Button appearance="outline" size="lg">
         Button
       </Button>
-      <Button variant="danger" size="lg">
+      <Button appearance={"outline"} variant="danger" size="lg">
         Button
       </Button>
-      <Button variant="invert" size="lg">
+      <Button appearance={"outline"} variant="primary" size="lg">
         Button
       </Button>
     </div>
@@ -50,13 +50,13 @@ export function Outline_Button() {
 export function Dashed_Button() {
   return (
     <div className="flex gap-5">
-      <Button apparance="dashed" size="lg">
+      <Button appearance="dashed" size="lg">
         Button
       </Button>
-      <Button variant="danger" apparance={"dashed"} size="lg">
+      <Button variant="danger" appearance={"dashed"} size="lg">
         Button
       </Button>
-      <Button variant="invert" apparance={"dashed"} size="lg">
+      <Button variant="invert" appearance={"dashed"} size="lg">
         Button
       </Button>
     </div>
@@ -70,11 +70,11 @@ export function With_Icon_Button() {
         <UserIcon />
         <p className="font-medium">User</p>
       </Button>
-      <Button apparance="outline" size="md">
+      <Button appearance="outline" size="md">
         <MailIcon />
         <p className="font-medium">Mail</p>
       </Button>
-      <Button apparance="ghost" size="md">
+      <Button appearance="ghost" size="md">
         <XIcon />
         <p className="font-medium">Close</p>
       </Button>
@@ -85,7 +85,7 @@ export function With_Icon_Button() {
 export function Notification_Button() {
   return (
     <div className="relative inline-block">
-      <Button apparance="outline" size="icon">
+      <Button appearance="outline" size="icon">
         <MailIcon />
       </Button>
       <span className="absolute top-0 -right-0.5 -translate-x-1/4 -translate-y-1/4 h-2 w-2 bg-red-500 rounded-full animate-bounce"></span>
@@ -99,10 +99,10 @@ export function Icon_Only_Button() {
       <Button size="icon">
         <UserIcon />
       </Button>
-      <Button apparance="outline" size="icon">
+      <Button appearance="outline" size="icon">
         <MailIcon />
       </Button>
-      <Button apparance="ghost" size="icon">
+      <Button appearance="ghost" size="icon">
         <XIcon />
       </Button>
     </div>

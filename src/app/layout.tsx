@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 // import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/_ui/themeProvider";
 import Navbar from "@/components/_ui/NavbarDesktop";
+import ContextWrapper from "@/components/_ui/ContextWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,12 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <body className="antialiased ">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div data-vaul-drawer-wrapper>
-            <Navbar />
-            <div className="m-10">{children}</div>
-          </div>
-        </ThemeProvider>
+        <ContextWrapper>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <div data-vaul-drawer-wrapper>
+              <Navbar />
+              <div className="m-10">{children}</div>
+            </div>
+          </ThemeProvider>
+        </ContextWrapper>
       </body>
     </html>
   );

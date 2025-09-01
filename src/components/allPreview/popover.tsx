@@ -12,7 +12,7 @@ export function PopoverDemo() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button apparance={"outline"}>Apri Popover</Button>
+        <Button appearance={"outline"}>Apri Popover</Button>
       </PopoverTrigger>
       <PopoverContent side="top">
         <div className="relative">

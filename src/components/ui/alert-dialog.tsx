@@ -140,7 +140,7 @@ function AlertDialogCancel({
     <AlertDialogPrimitive.Cancel
       data-slot="alert-dialog-cancel"
       className={cn(
-        buttonVariants({ apparance: "outline" }),
+        buttonVariants({ appearance: "outline" }),
         "mt-2 sm:mt-0",
         className
       )}

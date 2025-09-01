@@ -23,7 +23,7 @@ export function PaginationDemo() {
           {/* First Page */}
           <PaginationItem>
             <Button
-              apparance="ghost"
+              appearance="ghost"
               size="md"
               className="disabled:opacity-50"
               aria-label="Prima pagina"
@@ -34,20 +34,20 @@ export function PaginationDemo() {
           </PaginationItem>
           {/* Previous Page */}
           <PaginationItem>
-            <Button apparance={"ghost"} size="icon">
+            <Button appearance={"ghost"} size="icon">
               1
             </Button>
-            <Button variant={"invert"} apparance={"outline"} size="icon">
+            <Button variant={"invert"} appearance={"outline"} size="icon">
               2
             </Button>
-            <Button apparance={"ghost"} size="icon">
+            <Button appearance={"ghost"} size="icon">
               3
             </Button>
           </PaginationItem>
           {/* Last Page */}
           <PaginationItem>
             <Button
-              apparance="ghost"
+              appearance="ghost"
               size="md"
               className="disabled:opacity-50"
               aria-label="Ultima pagina"
@@ -69,7 +69,7 @@ export function Pagination_Ellipsis() {
           {/* First Page */}
           <PaginationItem>
             <Button
-              apparance="ghost"
+              appearance="ghost"
               size="icon"
               className="h-8 w-8 disabled:opacity-50"
               aria-label="Prima pagina"
@@ -80,7 +80,7 @@ export function Pagination_Ellipsis() {
           {/* Previous Page */}
           <PaginationItem>
             <Button
-              apparance="ghost"
+              appearance="ghost"
               size="icon"
               className="h-8 w-8 disabled:opacity-50"
               aria-label="Pagina precedente"
@@ -89,20 +89,20 @@ export function Pagination_Ellipsis() {
             </Button>
           </PaginationItem>
           <PaginationItem>
-            <Button apparance={"ghost"} size="icon">
+            <Button appearance={"ghost"} size="icon">
               1
             </Button>
-            <Button variant={"invert"} apparance={"outline"} size="icon">
+            <Button variant={"invert"} appearance={"outline"} size="icon">
               2
             </Button>
-            <Button apparance={"ghost"} size="icon">
+            <Button appearance={"ghost"} size="icon">
               3
             </Button>
           </PaginationItem>
           <PaginationEllipsis />
           <PaginationItem>
             <Button
-              apparance="ghost"
+              appearance="ghost"
               size="icon"
               className="h-8 w-8 disabled:opacity-50"
               aria-label="Pagina successiva"
@@ -113,7 +113,7 @@ export function Pagination_Ellipsis() {
           {/* Last Page */}
           <PaginationItem>
             <Button
-              apparance="ghost"
+              appearance="ghost"
               size="icon"
               className="h-8 w-8 disabled:opacity-50"
               aria-label="Ultima pagina"
@@ -134,7 +134,7 @@ export function Pagination_Card() {
           {/* First Page */}
           <PaginationItem>
             <Button
-              apparance="ghost"
+              appearance="ghost"
               size="icon"
               className="h-8 w-8 disabled:opacity-50"
               aria-label="Prima pagina"
@@ -145,7 +145,7 @@ export function Pagination_Card() {
           {/* Previous Page */}
           <PaginationItem>
             <Button
-              apparance="ghost"
+              appearance="ghost"
               size="icon"
               className="h-8 w-8 disabled:opacity-50"
               aria-label="Pagina precedente"
@@ -154,20 +154,20 @@ export function Pagination_Card() {
             </Button>
           </PaginationItem>
           <PaginationItem>
-            <Button apparance={"ghost"} size="icon">
+            <Button appearance={"ghost"} size="icon">
               1
             </Button>
-            <Button variant={"invert"} apparance={"outline"} size="icon">
+            <Button variant={"invert"} appearance={"outline"} size="icon">
               2
             </Button>
-            <Button apparance={"ghost"} size="icon">
+            <Button appearance={"ghost"} size="icon">
               3
             </Button>
           </PaginationItem>
           <PaginationEllipsis />
           <PaginationItem>
             <Button
-              apparance="ghost"
+              appearance="ghost"
               size="icon"
               className="h-8 w-8 disabled:opacity-50"
               aria-label="Pagina successiva"
@@ -178,7 +178,7 @@ export function Pagination_Card() {
           {/* Last Page */}
           <PaginationItem>
             <Button
-              apparance="ghost"
+              appearance="ghost"
               size="icon"
               className="h-8 w-8 disabled:opacity-50"
               aria-label="Ultima pagina"
