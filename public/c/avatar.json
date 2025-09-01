@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "dependencies": [
+    "radix-ui",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/simoneM05/smui/refs/heads/main/recipe/avatar.json"
+  ],
+  "files": [
+    {
+      "path": "registry/default/ui/avatar.tsx",
+      "type": "registry:ui",
+      "content": "'use client';\nimport * as React from 'react';\nimport * as AvatarPrimitive from '@radix-ui/react-avatar';\nimport { cn } from '@/lib/utils';\nimport { cva, type VariantProps } from 'class-variance-authority';\nimport { motion, MotionProps } from 'motion/react';\n\nconst AvatarVariant = cva(\n  'inline-flex items-center justify-center text-sm font-medium overflow-hidden',\n  {\n    variants: {\n      size: {\n        sm: 'h-6 w-6 text-xs',\n        md: 'h-10 w-10 text-sm',\n        lg: 'h-14 w-14 text-lg',\n      },\n      rounded: {\n        none: 'rounded-none',\n        square: 'rounded-md',\n        pill: 'rounded-full',\n      },\n    },\n    defaultVariants: {\n      size: 'md',\n      rounded: 'pill',\n    },\n  }\n);\n\ninterface AvatarProps extends React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>, VariantProps<typeof AvatarVariant> {\n  className?: string;\n  motionProps?: MotionProps;\n}\n\nfunction Avatar({ className, size, rounded, motionProps, ...props }: AvatarProps) {\n  return (\n    <motion.div className='inline-flex' {...motionProps}>\n      <AvatarPrimitive.Root\n        data-slot='avatar'\n        className={cn(AvatarVariant({ size, rounded }), className)}\n        {...props}\n      />\n    </motion.div>\n  );\n}\n\nfunction AvatarImage({ className, ...props }: React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>) {\n  return (\n    <AvatarPrimitive.Image\n      data-slot='avatar-image'\n      className={cn('aspect-square h-full w-full object-cover', className)}\n      {...props}\n    />\n  );\n}\n\nfunction AvatarFallback({ className, size, rounded, ...props }: React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback> & VariantProps<typeof AvatarVariant>) {\n  return (\n    <AvatarPrimitive.Fallback\n      data-slot='avatar-fallback'\n      className={cn(\n        AvatarVariant({ size, rounded }),\n        'flex items-center justify-center bg-muted font-semibold',\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Avatar, AvatarImage, AvatarFallback };"
+    },
+    {
+      "path": "registry/default/lib/utils.ts",
+      "type": "registry:lib",
+      "content": "import { clsx, type ClassValue } from 'clsx'\n;import { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]): string {\nreturn twMerge(clsx(inputs));\n}\n"
+    }
+  ]
+}

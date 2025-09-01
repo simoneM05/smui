@@ -1,38 +1,51 @@
+"use client";
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 import { Button } from "./button";
 
-// ================= Variants per Alert =================
 const alertVariants = cva(
-  "relative w-full rounded-lg border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current transition-opacity duration-200",
+  "relative rounded-lg border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current transition-opacity duration-200",
   {
     variants: {
       variant: {
-        default: "bg-card text-card-foreground",
+        default:
+          "bg-card text-card-foreground [&_svg:not([class*=size-])]:size-4",
         destructive:
-          "text-destructive bg-destructive/10 [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90",
+          "text-foreground font-medium border-destructive/60 bg-destructive/20 [&>svg]:text-destructive [&_svg:not([class*=size-])]:size-4",
         success:
-          "text-foreground bg-green-900 [&>svg]:text-green-500 *:data-[slot=alert-description]:text-green-800/90",
+          "text-success-foreground bg-success border-success   [&>svg]:text-success-icon [&_svg:not([class*=size-])]:size-4 font-medium",
         warning:
-          "text-foreground bg-yellow-900 [&>svg]:text-yellow-500 *:data-[slot=alert-description]:text-yellow-800/90",
-        info: "text-foreground bg-blue-900 [&>svg]:text-blue-500 *:data-[slot=alert-description]:text-blue-800/90",
+          "text-warning-foreground bg-warning border-warning [&>svg]:text-warning-icon  [&_svg:not([class*=size-])]:size-4 font-medium",
+        info: "text-info-foreground bg-info border-info  [&>svg]:text-info-icon [&_svg:not([class*=size-])]:size-4 font-medium",
       },
       appearance: {
         solid: "border-transparent",
-        outline: "border-2 border-border bg-transparent",
-        dashed: "border-2 border-dashed border-border bg-transparent",
+        outline: "border-3 bg-transparent dark:bg-transparent",
+        dashed: "border-3 border-dashed border-border bg-transparent",
+      },
+
+      size: {
+        sm: "px-3 py-2 text-xs min-w-48",
+        md: "px-4 py-3 text-sm min-w-64",
+        lg: "px-6 py-4 text-base min-w-80",
+      },
+
+      lines: {
+        single: "items-center",
+        multiple: "items-start",
       },
     },
     defaultVariants: {
       variant: "default",
       appearance: "solid",
+      size: "md",
+      lines: "multiple",
     },
   }
 );
 
-// ================= Alert Root =================
 type AlertProps = React.ComponentProps<"div"> &
   VariantProps<typeof alertVariants> & {
     close?: boolean;
@@ -46,25 +59,35 @@ export function Alert({
   close,
   onClose,
   appearance,
+  size,
+  lines,
   ...props
 }: AlertProps) {
+  const gridCols = close
+    ? "has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr_auto] grid-cols-[0_1fr_auto]"
+    : "has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr]";
+
   return (
     <div
       data-slot="alert"
       role="alert"
       aria-live="polite"
-      className={cn(alertVariants({ variant, appearance }), className)}
+      className={cn(
+        alertVariants({ variant, appearance, size, lines }),
+        gridCols,
+        className
+      )}
       {...props}
     >
       {children}
       {close && (
         <Button
-          variant="ghost"
+          variant="invert"
           size="sm"
           aria-label="Close"
           data-slot="alert-close"
           onClick={onClose}
-          className="absolute top-2 right-2 group shrink-0"
+          className="col-start-3 row-start-1 group shrink-0 ml-2"
         >
           <X className="size-4 group-hover:opacity-100 opacity-40" />
         </Button>
@@ -73,7 +96,6 @@ export function Alert({
   );
 }
 
-// ================= Sub-components =================
 export function AlertTitle({
   className,
   ...props
@@ -82,7 +104,7 @@ export function AlertTitle({
     <div
       data-slot="alert-title"
       className={cn(
-        "col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight",
+        "col-start-2 min-h-4 font-medium tracking-tight [.lines-single_&]:line-clamp-1 [.lines-single_&]:truncate",
         className
       )}
       {...props}
@@ -98,7 +120,7 @@ export function AlertDescription({
     <div
       data-slot="alert-description"
       className={cn(
-        "text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed",
+        "text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed [.lines-single_&]:line-clamp-1 [.lines-single_&]:truncate [.lines-single_&]:grid-cols-1",
         className
       )}
       {...props}

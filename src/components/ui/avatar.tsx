@@ -2,14 +2,9 @@
 import * as React from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { cn } from "@/lib/utils";
-import { cva } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 import { motion, MotionProps } from "motion/react";
 
-// Tipi riutilizzabili
-type AvatarSize = "sm" | "md" | "lg";
-type AvatarRounded = "none" | "sm" | "md" | "lg" | "full";
-
-// Varianti con cva
 const AvatarVariant = cva(
   "inline-flex items-center justify-center text-sm font-medium overflow-hidden",
   {
@@ -21,23 +16,20 @@ const AvatarVariant = cva(
       },
       rounded: {
         none: "rounded-none",
-        sm: "rounded-sm",
-        md: "rounded-md",
-        lg: "rounded-lg",
-        full: "rounded-full",
+        square: "rounded-md",
+        pill: "rounded-full",
       },
     },
     defaultVariants: {
       size: "md",
-      rounded: "full",
+      rounded: "pill",
     },
   }
 );
 
 interface AvatarProps
-  extends React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> {
-  size?: AvatarSize;
-  rounded?: AvatarRounded;
+  extends React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>,
+    VariantProps<typeof AvatarVariant> {
   className?: string;
   motionProps?: MotionProps;
 }
@@ -63,10 +55,7 @@ function Avatar({
 function AvatarImage({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image> & {
-  size?: AvatarSize;
-  rounded?: AvatarRounded;
-}) {
+}: React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>) {
   return (
     <AvatarPrimitive.Image
       data-slot="avatar-image"
@@ -81,10 +70,8 @@ function AvatarFallback({
   size,
   rounded,
   ...props
-}: React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback> & {
-  size?: AvatarSize;
-  rounded?: AvatarRounded;
-}) {
+}: React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback> &
+  VariantProps<typeof AvatarVariant>) {
   return (
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"

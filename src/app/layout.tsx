@@ -25,14 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <body className="antialiased ">
-        <ClerkProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div data-vaul-drawer-wrapper>
-              <Navbar />
-              <div className="m-10">{children}</div>
-            </div>
-          </ThemeProvider>
-        </ClerkProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <div data-vaul-drawer-wrapper>
+            <Navbar />
+            <div className="m-10">{children}</div>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -21,17 +21,43 @@ import {
 } from "@/components/ui/drawer"; // il tuo nuovo wrapper
 import * as link from "@/utils/constants";
 import { Separator } from "../ui/separetor";
+import { Component } from "@/generated/prisma";
 
 const NavbarLinksMobile = () => {
+  const [docsLinks, setDocsLinks] = React.useState<
+    { href: string; label: string }[]
+  >([]);
+
+  React.useEffect(() => {
+    const fetchComponents = async () => {
+      try {
+        const res = await fetch("/api/components");
+        if (!res.ok) throw new Error("Errore nel fetch dei componenti");
+        const components = await res.json();
+
+        const links = components.map((c: Component) => ({
+          href: `/Docs/${c.name}`,
+          label: c.name,
+        }));
+
+        setDocsLinks(links);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchComponents();
+  }, []);
+
   return (
     <>
       {link.mainLinks.map((link) => (
-        <NavigationMenuItem key={link.href}>
+        <NavigationMenuItem key={link.label}>
           <NavigationMenuLink className="py-1" asChild>
             <Link
               href={link.href}
               className={cn(
-                "text-base  font-medium text-foreground transition-colors  hover:bg-transparent active:bg-transparent focus:bg-transparent"
+                "text-base font-medium text-foreground transition-colors hover:bg-transparent active:bg-transparent focus:bg-transparent"
               )}
             >
               {link.label}
@@ -39,29 +65,17 @@ const NavbarLinksMobile = () => {
           </NavigationMenuLink>
         </NavigationMenuItem>
       ))}
-      <SignedIn>
-        <NavigationMenuItem key="/Profile">
-          <NavigationMenuLink asChild>
-            <Link
-              href="/Profile"
-              className={cn(
-                "text-base font-medium text-foreground transition-colors hover:bg-transparent active:bg-transparent focus:bg-transparent"
-              )}
-            >
-              Profile
-            </Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-      </SignedIn>
+
       <Separator className="bg-transparent p-2" />
       <p className="text-sm text-primary font-medium">Component UI</p>
-      {link.docsLinks.map((link) => (
+
+      {docsLinks.map((link) => (
         <NavigationMenuItem key={link.href}>
           <NavigationMenuLink className="py-1" asChild>
             <Link
               href={link.href}
               className={cn(
-                "text-base font-medium  text-foreground/50 transition-colors  hover:bg-transparent active:bg-transparent focus:bg-transparent"
+                "text-base font-medium text-foreground/50 transition-colors hover:bg-transparent active:bg-transparent focus:bg-transparent"
               )}
             >
               {link.label}

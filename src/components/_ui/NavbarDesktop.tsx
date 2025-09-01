@@ -56,7 +56,8 @@ const NavbarLinksDesktop = () => {
               href={link.href}
               className={cn(
                 "font-medium hover:text-foreground text-foreground/60 transition-colors",
-                pathname === link.href && "text-foreground"
+                pathname.split("/")[1] === link.href.split("/")[1] &&
+                  "text-foreground"
               )}
             >
               {link.label}
@@ -64,7 +65,7 @@ const NavbarLinksDesktop = () => {
           </NavigationMenuLink>
         </NavigationMenuItem>
       ))}
-      <SignedIn>
+      {/* <SignedIn>
         <NavigationMenuItem key="/Profile">
           <NavigationMenuLink
             className="hover:bg-transparent active:bg-transparent focus:bg-transparent"
@@ -81,7 +82,7 @@ const NavbarLinksDesktop = () => {
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-      </SignedIn>
+      </SignedIn> */}
     </>
   );
 };

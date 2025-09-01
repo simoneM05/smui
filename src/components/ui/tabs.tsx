@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { Tabs as TabsPrimitive } from "radix-ui";
 
-const tabsListVariants = cva("flex items-center w-fit shrink-0", {
+const tabsListVariants = cva("flex items-center shrink-0", {
   variants: {
     variant: {
       default: "bg-accent p-1",
@@ -77,7 +77,7 @@ const tabsListVariants = cva("flex items-center w-fit shrink-0", {
 });
 
 const tabsTriggerVariants = cva(
-  "shrink-0 cursor-pointer whitespace-nowrap inline-flex justify-center items-center font-medium ring-offset-background transition-colors focus-visible:outline-none disabled:opacity-50 [&_svg]:shrink-0 [&_svg]:text-muted-foreground hover:[&_svg]:text-primary [&[data-state=active]_svg]:text-primary",
+  "shrink-0 cursor-pointer whitespace-nowrap p-4 inline-flex justify-center items-center font-medium ring-offset-background transition-colors focus-visible:outline-none disabled:opacity-50 [&_svg]:shrink-0 [&_svg]:text-muted-foreground hover:[&_svg]:text-primary [&[data-state=active]_svg]:text-primary",
   {
     variants: {
       variant: {
@@ -85,7 +85,10 @@ const tabsTriggerVariants = cva(
           "text-muted-foreground data-[state=active]:bg-background hover:text-foreground data-[state=active]:text-foreground data-[state=active]:shadow-xs data-[state=active]:shadow-black/5",
         button:
           "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 text-accent-foreground hover:text-foreground data-[state=active]:bg-accent data-[state=active]:text-foreground",
-        line: "border-b-2 text-muted-foreground border-transparent data-[state=active]:border-primary data-[state=active]:text-primary hover:text-primary",
+        outline:
+          "data-[state=active]:border-2 data-[state=active]:text-foreground data-[state=active]:border-muted-foreground text-muted-foreground bg-transparent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md transition-colors",
+        line: "border-b-3 text-muted-foreground border-transparent data-[state=active]:border-primary data-[state=active]:text-primary hover:text-primary",
+        none: "text-muted-foreground  hover:text-foreground data-[state=active]:text-foreground",
       },
       size: {
         lg: "gap-1.5 text-sm [&_svg:not([class*=size-])]:size-4",
@@ -105,10 +108,20 @@ const tabsTriggerVariants = cva(
       { variant: "button", size: "sm", className: "py-1.5 px-2.5 rounded-md" },
       { variant: "button", size: "xs", className: "py-1 px-2 rounded-md" },
 
+      { variant: "outline", size: "lg", className: "py-1.5 px-4 rounded-lg" },
+      { variant: "outline", size: "md", className: "py-1.5 px-3 rounded-lg" },
+      { variant: "outline", size: "sm", className: "py-1.5 px-2.5 rounded-md" },
+      { variant: "outline", size: "xs", className: "py-1.5 px-2 rounded-md" },
+
       { variant: "line", size: "lg", className: "py-3" },
       { variant: "line", size: "md", className: "py-2.5" },
       { variant: "line", size: "sm", className: "py-2" },
       { variant: "line", size: "xs", className: "py-1.5" },
+
+      { variant: "none", size: "lg", className: "py-3" },
+      { variant: "none", size: "md", className: "py-2.5" },
+      { variant: "none", size: "sm", className: "py-2" },
+      { variant: "none", size: "xs", className: "py-1.5" },
     ],
 
     defaultVariants: {
@@ -118,7 +131,7 @@ const tabsTriggerVariants = cva(
   }
 );
 const tabsContentVariants = cva(
-  "mt-2.5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+  "mt-5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
   {
     variants: {
       variant: {

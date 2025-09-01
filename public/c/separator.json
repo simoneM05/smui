@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "type": "registry:ui",
+  "dependencies": [
+    "@radix-ui",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge",
+    "lucide-react"
+  ],
+  "registryDependencies": ["https://example.com/path/to/your/registry.json"],
+  "files": [
+    {
+      "path": "registry/default/ui/separator.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\"; import * as React from 'react'; import { cn } from '@/lib/utils'; import { Separator as SeparatorPrimitive } from 'radix-ui'; function Separator({ className, orientation = 'horizontal', decorative = true, ...props }: React.ComponentProps<typeof SeparatorPrimitive.Root>) { return <SeparatorPrimitive.Root data-slot='separator' decorative={decorative} orientation={orientation} className={cn('shrink-0 bg-border', orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px', className)} {...props} />; } export { Separator }; "
+    },
+    {
+      "path": "registry/default/lib/utils.ts",
+      "type": "registry:lib",
+      "content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]): string {\n  return twMerge(clsx(inputs));\n}\n"
+    }
+  ]
+}

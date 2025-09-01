@@ -147,7 +147,7 @@ export default function Hero() {
             <TooltipProvider key={i}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button size="icon" variant={"none"} className="h-12 w-12">
+                  <Button size="icon" variant={"invert"} className="h-12 w-12">
                     {tech.svg}
                   </Button>
                 </TooltipTrigger>

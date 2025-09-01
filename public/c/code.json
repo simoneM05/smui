@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "code",
+  "type": "registry:ui",
+  "dependencies": [
+    "radix-ui",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/simoneM05/smui/refs/heads/main/recipe/code.json"
+  ],
+  "files": [
+    {
+      "path": "registry/default/ui/code.tsx",
+      "type": "registry:ui",
+      "content": "'use client';\nimport * as React from 'react';\nimport { Button } from '@/components/ui/button';\nimport { cn } from '@/lib/utils';\nimport { Copy, CopyCheck } from 'lucide-react';\nimport { cva, type VariantProps } from 'class-variance-authority';\nimport { Slot } from '@radix-ui/react-slot';\n\nconst codeVariants = cva('relative rounded-md bg-muted text-sm font-mono font-medium', {\n  variants: {\n    variant: {\n      default: 'bg-muted text-muted-foreground',\n      destructive: 'bg-destructive/10 text-destructive',\n      outline: 'bg-background border-border border text-foreground',\n    },\n    size: {\n      default: 'text-sm px-2.5 py-1.5',\n      sm: 'text-xs px-2 py-1',\n      lg: 'text-base px-3 py-1.5',\n    },\n  },\n  defaultVariants: {\n    variant: 'default',\n    size: 'default',\n  },\n});\n\ninterface CodeProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof codeVariants> {\n  asChild?: boolean;\n  showCopyButton?: boolean;\n  copyText?: string;\n}\n\nexport function Code({ className, children, variant, size, asChild = false, showCopyButton = false, copyText, ...props }: CodeProps) {\n  const [copy, copied] = React.useState(false);\n  const Comp = asChild ? Slot : 'code';\n  const textToCopy = copyText || (typeof children === 'string' && children);\n\n  return (\n    <span className={cn(className, 'inline-flex items-center gap-2')} data-slot='code'>\n      <Comp data-slot='code-element' className={cn(codeVariants({ variant, size }))} {...props}>\n        {children}\n      </Comp>\n      {showCopyButton && textToCopy && (\n        <Button apparance={'ghost'} size='icon' className='h-4 w-4 p-0 opacity-60 hover:opacity-100' onClick={() => { navigator.clipboard.writeText(textToCopy); copied(true); setTimeout(() => copied(false), 1000); }}>\n          {copy ? <CopyCheck size={4} /> : <Copy size={4} />}\n        </Button>\n      )}\n    </span>\n  );\n}"
+    },
+    {
+      "path": "registry/default/ui/button.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Slot } from '@radix-ui/react-slot';\nimport { cva, type VariantProps } from 'class-variance-authority';\nimport { cn } from '@/lib/utils';\n\nconst buttonVariants = cva(\n  'inline-flex items-center justify-center font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 outline-none',\n  {\n    variants: {\n      variant: {\n        primary: 'text-primary-foreground bg-primary hover:bg-primary/40',\n        secondary: 'text-secondary-foreground bg-secondary hover:bg-secondary/40',\n        danger: 'text-destructive-foreground bg-destructive hover:bg-destructive/40',\n        invert: '',\n      },\n      apparance: {\n        solid: '',\n        outline: 'border-2 border-border hover:bg-accent/20 text-foreground bg-transparent',\n        link: 'bg-transparent hover:bg-trasparent text-blue-600 underline-offset-4 hover:underline',\n        dashed: 'border-2 bg-transparent border-dashed border-border',\n        ghost: 'bg-transparent',\n      },\n      size: {\n        lg: 'h-10 rounded-md px-4 text-sm gap-1.5 [&_svg:not([class*=size-])]:size-4',\n        md: 'h-8.5 rounded-md px-3 gap-1.5 text-[0.8125rem] [&_svg:not([class*=size-])]:size-4',\n        sm: 'h-7 rounded-md px-2.5 gap-1.25 text-xs [&_svg:not([class*=size-])]:size-3.5',\n        icon: 'size-8.5 rounded-md [&_svg:not([class*=size-])]:size-4 shrink-0',\n      },\n      shape: {\n        rounded: 'rounded-lg',\n        pill: 'rounded-full',\n        square: 'rounded-none',\n      },\n      underline: {\n        true: 'underline',\n        false: '',\n      },\n    },\n    compoundVariants: [\n      { variant: 'primary', apparance: 'outline', class: 'text-primary border-primary hover:bg-primary/10' },\n      { variant: 'secondary', apparance: 'outline', class: 'text-secondary border-secondary hover:bg-secondary/10' },\n      { variant: 'danger', apparance: 'outline', class: 'text-destructive border-destructive hover:bg-destructive/10' },\n      { variant: 'primary', apparance: 'ghost', class: 'text-primary bg-transparent hover:bg-primary/10' },\n      { variant: 'secondary', apparance: 'ghost', class: 'text-secondary bg-transparent hover:bg-secondary/10' },\n      { variant: 'danger', apparance: 'ghost', class: 'text-destructive bg-transparent hover:bg-destructive/10' },\n      { variant: 'primary', apparance: 'dashed', class: 'text-primary  border-primary hover:text-primary/70' },\n      { variant: 'secondary', apparance: 'dashed', class: 'text-secondary border-secondary hover:text-secondary/70' },\n      { variant: 'danger', apparance: 'dashed', class: 'text-destructive border-destructive hover:text-destructive/70' }\n    ],\n    defaultVariants: { variant: 'primary', apparance: 'solid', size: 'md', shape: 'rounded', underline: false }\n  }\n);\n\ntype ButtonProps = React.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & { asChild?: boolean };\n\nfunction Button({ className, variant, size, apparance, underline, shape, asChild = false, ...props }: ButtonProps) {\n  const Comp = asChild ? Slot : 'button';\n  const resolvedVariant = apparance === 'outline' && !variant ? 'invert' : variant;\n\n  return (\n    <Comp\n      data-slot='button'\n      className={cn(buttonVariants({ variant: resolvedVariant, size, shape, apparance, underline, className }))}\n      {...props}\n    />\n  );\n}\n\nexport { Button, buttonVariants };"
+    },
+    {
+      "path": "registry/default/lib/utils.ts",
+      "type": "registry:lib",
+      "content": "import { clsx, type ClassValue } from 'clsx'\n;import { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]): string {\nreturn twMerge(clsx(inputs));\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:ui",
+  "dependencies": [
+    "radix-ui",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge",
+    "lucide-react"
+  ],
+  "registryDependencies": ["http://localhost:3000/c/badge.json"],
+  "files": [
+    {
+      "path": "registry/default/ui/badge.tsx",
+      "type": "registry:ui",
+      "content": "'use client';\nimport * as React from 'react';\nimport { cn } from '@/lib/utils';\nimport { cva, type VariantProps } from 'class-variance-authority';\nimport { Slot } from '@radix-ui/react-slot';\n\nconst badgeVariants = cva(\n  'inline-flex items-center justify-center rounded-full text-sm font-medium leading-none',\n  {\n    variants: {\n      variant: {\n        default: 'bg-primary text-primary-foreground border-primary',\n        success: 'bg-success border-success text-success-foreground',\n        warning: 'bg-warning text-warning-foreground border-warning',\n        info: 'bg-info text-info-foreground border-info',\n        primary: 'bg-primary text-primary-foreground border-primary',\n        secondary: 'bg-secondary text-secondary-foreground border-secondary',\n        destructive: 'bg-destructive text-destructive-foreground border-destructive',\n      },\n      appearance: {\n        solid: '',\n        outline: 'border-2 font-semibold',\n        ghost: 'bg-transparent',\n      },\n      size: {\n        lg: 'rounded-md px-[0.5rem] h-7 min-w-7 gap-1.5 text-xs [&_svg]:size-3.5',\n        md: 'rounded-md px-[0.45rem] h-6 min-w-6 gap-1.5 text-xs [&_svg]:size-3.5',\n        sm: 'rounded-sm px-[0.325rem] h-5 min-w-5 gap-1 text-[0.6875rem] leading-[0.75rem] [&_svg]:size-3',\n        xs: 'rounded-sm px-[0.25rem] h-4 min-w-4 gap-1 text-[0.625rem] leading-[0.5rem] [&_svg]:size-3',\n      },\n      shape: {\n        pill: 'rounded-full',\n        square: 'rounded-md',\n      },\n      disabled: {\n        true: 'opacity-50 cursor-not-allowed',\n        false: '',\n      },\n    },\n    compoundVariants: [\n      { variant: 'default', appearance: 'outline', className: 'bg-primary/30 text-primary-text' },\n      { variant: 'success', appearance: 'outline', className: 'bg-success/30 text-success-text' },\n      { variant: 'warning', appearance: 'outline', className: 'bg-warning/30 text-warning-text' },\n      { variant: 'info', appearance: 'outline', className: 'bg-info/30 text-info-text' },\n      { variant: 'primary', appearance: 'outline', className: 'bg-primary/30 text-primary' },\n      { variant: 'secondary', appearance: 'outline', className: 'bg-secondary/30 text-secondary-foreground' },\n      { variant: 'destructive', appearance: 'outline', className: 'bg-destructive/30 text-destructive' },\n      { variant: 'default', appearance: 'ghost', className: 'text-primary-text' },\n      { variant: 'success', appearance: 'ghost', className: 'text-success-text' },\n      { variant: 'warning', appearance: 'ghost', className: 'text-warning-text' },\n      { variant: 'info', appearance: 'ghost', className: 'text-info-text' },\n      { variant: 'primary', appearance: 'ghost', className: 'text-primary' },\n      { variant: 'secondary', appearance: 'ghost', className: 'text-secondary-foreground' },\n      { variant: 'destructive', appearance: 'ghost', className: 'text-destructive' }\n    ],\n    defaultVariants: {\n      variant: 'default',\n      appearance: 'solid',\n      size: 'md',\n      shape: 'square',\n      disabled: false\n    },\n  }\n);\n\nconst badgeButtonVariants = cva(\n  'inline-flex items-center justify-center hover:cursor-pointer opacity-60 hover:opacity-100 rounded-full text-sm font-medium leading-none',\n  {\n    variants: { variant: { default: '' } },\n    defaultVariants: { variant: 'default' },\n  }\n);\n\nexport interface BadgeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof badgeVariants> {\n  asChild?: boolean;\n  disabled?: boolean;\n}\n\nfunction Badge({ className, variant, size, shape, appearance, asChild = false, disabled = false, ...props }: BadgeProps) {\n  const Comp = asChild ? Slot : 'div';\n  return (\n    <Comp\n      className={cn(badgeVariants({ variant, size, appearance, shape, disabled }), className)}\n      {...props}\n    />\n  );\n}\n\nfunction BadgeButton({ className, variant, asChild = false, ...props }: React.ComponentProps<'button'> & VariantProps<typeof badgeButtonVariants> & { asChild?: boolean }) {\n  const Comp = asChild ? Slot : 'span';\n  return (\n    <Comp\n      data-slot='badge-button'\n      className={cn(badgeButtonVariants({ variant, className }))}\n      role='button'\n      {...props}\n    />\n  );\n}\n\nexport { Badge, BadgeButton };"
+    },
+    {
+      "path": "registry/default/lib/utils.ts",
+      "type": "registry:lib",
+      "content": "import { clsx, type ClassValue } from 'clsx'\n;import { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]): string {\nreturn twMerge(clsx(inputs));\n}\n"
+    }
+  ]
+}

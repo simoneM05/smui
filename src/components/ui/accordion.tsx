@@ -6,30 +6,29 @@ import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
 // ================= Variants per Accordion Root =================
-const accordionVariants = cva(
-  "w-full border-2 py-4 px-2 border-border rounded-lg ",
-  {
-    variants: {
-      variant: {
-        default: "",
-        primary: "border-primary text-primary",
-        secondary: "border-secondary text-secondary",
-        destructive: "border-destructive text-destructive",
-      },
+const accordionVariants = cva("w-full py-4 px-2 border-border rounded-lg ", {
+  variants: {
+    variant: {
+      default: "",
+      primary: "border-primary text-primary",
+      secondary: "border-secondary text-secondary",
+      destructive: "border-destructive text-destructive",
     },
-    defaultVariants: {},
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 // ================= Variants per AccordionItem =================
 const accordionItemVariants = cva("transition-all rounded-lg p-2 m-2", {
   variants: {
     variant: {
       indicator:
-        "relative rounded-none [&::after]:content-[''] [&::after]:block [&::after]:h-0.5 [&::after]:bg-border [&::after]:absolute [&::after]:left-1 [&::after]:right-1 [&::after]:bottom-0",
+        "relative rounded-none [&::after]:content-['']  [&::after]:block [&::after]:h-0.5 [&::after]:bg-border [&::after]:absolute [&::after]:left-1 [&::after]:right-1 [&::after]:bottom-0",
       solid: "dark:bg-accent/40 bg-accent",
       outline: "border-2",
-      ghost: "",
+      ghost: "hover:bg-accent/40",
     },
   },
   defaultVariants: {
@@ -158,7 +157,7 @@ type AccordionTriggerProps = React.ComponentPropsWithoutRef<
 function AccordionTrigger({
   className,
   variant,
-  indicator,
+  indicator = "arrow",
   children,
   ...props
 }: AccordionTriggerProps) {

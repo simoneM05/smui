@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge",
+    "lucide-react"
+  ],
+  "registryDependencies": ["https://example.com/path/to/your/registry.json"],
+  "files": [
+    {
+      "path": "registry/default/ui/skeleton.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react'; import { cn } from '@/lib/utils'; function Skeleton({ className, ...props }: React.ComponentProps<'div'>) { return <div data-slot='skeleton' className={cn('animate-pulse rounded-md bg-accent', className)} {...props} />; } export { Skeleton };"
+    },
+    {
+      "path": "registry/default/lib/utils.ts",
+      "type": "registry:lib",
+      "content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]): string {\n  return twMerge(clsx(inputs));\n}\n"
+    }
+  ]
+}

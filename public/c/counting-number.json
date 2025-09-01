@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "counting-number",
+  "type": "registry:ui",
+  "dependencies": [
+    "motion",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge",
+    "lucide-react"
+  ],
+  "registryDependencies": ["https://example.com/path/to/your/registry.json"],
+  "files": [
+    {
+      "path": "registry/default/ui/counting-number.tsx",
+      "type": "registry:ui",
+      "content": "'use client';\nimport React, { useEffect, useState, useRef } from 'react';\nimport { animate, motion, UseInViewOptions, useMotionValue, useInView } from 'motion/react';\nimport { cn } from '@/lib/utils';\n\ninterface CountingNumberProps {\n  from?: number;\n  to?: number;\n  duration?: number;\n  delay?: number;\n  startOnView?: boolean;\n  className?: string;\n  once?: boolean;\n  inViewMargin?: UseInViewOptions['margin'];\n  onComplete?: () => void;\n  format?: (value: number) => string;\n}\n\nexport function CountingNumber({ from = 0, to = 200, duration = 3, delay = 0, startOnView = true, className, once = false, inViewMargin, onComplete, format = (value) => Math.round(value).toString(), ...props }: CountingNumberProps) {\n  const ref = useRef<HTMLSpanElement>(null);\n  const isInView = useInView(ref, { once, margin: inViewMargin });\n  const [hasAnimated, setHasAnimated] = useState(startOnView && isInView);\n  const [count, setCount] = useState(from);\n  const motionValue = useMotionValue(from);\n\n  const shouldStart = !startOnView || (isInView && (!once || !hasAnimated));\n\n  useEffect(() => {\n    if (!shouldStart) return;\n    setHasAnimated(true);\n    const timeout = setTimeout(() => {\n      const animation = animate(motionValue, to, {\n        duration,\n        onUpdate: (v) => setCount(v),\n        onComplete,\n      });\n      return () => animation.stop();\n    }, delay);\n    return () => clearTimeout(timeout);\n  }, [shouldStart, to, from, delay, duration]);\n\n  return (\n    <motion.span ref={ref} className={cn(className, ' font-semibold inline-block')} {...props}>\n      {format ? format(count) : Math.round(count).toString()}\n    </motion.span>\n  );\n}"
+    },
+    {
+      "path": "registry/default/lib/utils.ts",
+      "type": "registry:lib",
+      "content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]): string {\n  return twMerge(clsx(inputs));\n}\n"
+    }
+  ]
+}
