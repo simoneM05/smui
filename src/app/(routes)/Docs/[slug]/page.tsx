@@ -18,7 +18,7 @@ const getComponents = async (slug: string) => {
   try {
     const baseUrl = process.env.BASE_URL || "http://localhost:3000";
     const res = await fetch(`${baseUrl}/api/components/${slug}`, {
-      cache: "no-store", // evita cache se vuoi sempre fresh
+      cache: "no-store",
     });
     if (!res.ok) throw new Error("Errore nel fetch dei componenti");
     const component: ComponentR = await res.json();
