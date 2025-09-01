@@ -7,13 +7,13 @@ export async function GET() {
   try {
     const components = await prisma.component.findMany({
       include: {
-        examples: true, // se vuoi includere anche gli ExampleComponent
+        examples: true,
       },
     });
 
     return NextResponse.json(components, { status: 200 });
   } catch (error) {
-    console.error("Errore nel recupero dei componenti:", error);
+    console.error("Errore nel recupero del componente:", error);
     return NextResponse.json(
       { error: "Errore nel recupero dei componenti" },
       { status: 500 }

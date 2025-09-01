@@ -17,7 +17,7 @@ export async function generateMetadata({
 const getComponents = async (slug: string) => {
   try {
     const baseUrl = process.env.BASE_URL || "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/api/components/${slug}`, {
+    const res = await fetch(`https://smui.vercel.app/api/components/${slug}`, {
       cache: "no-store", // evita cache se vuoi sempre fresh
     });
     if (!res.ok) throw new Error("Errore nel fetch dei componenti");
